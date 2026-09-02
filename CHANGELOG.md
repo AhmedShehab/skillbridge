@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `agent-sync` are documented here.
+All notable changes to `skillbridge` are documented here.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/).
 
@@ -9,7 +9,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - Adapters for ZCode, Zed Agent, Windsurf, Continue CLI, Amazon Q Developer, Kiro CLI, Qwen Code, Pi, Goose, Crush, Factory Droid, OpenHands, Roo Code, Amp, Kimi Code CLI, Junie, and Mistral Vibe.
-- Recursive discovery for documented Markdown rule directories, with filtering for non-instruction configuration files and generated `agent-sync` output.
+- Recursive discovery for documented Markdown rule directories, with filtering for non-instruction configuration files and generated SkillBridge output.
+
+### Changed
+
+- Renamed the package and CLI from `agent-sync` to `skill-bridge` / `skillbridge`; the legacy `AGENT_SYNC_HOME` environment variable remains accepted as a compatibility fallback.
 
 ## [0.1.0] - 2026-09-02
 

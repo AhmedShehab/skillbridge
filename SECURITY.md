@@ -2,11 +2,11 @@
 
 ## Scope
 
-`agent-sync` is designed to run locally and write only to its canonical profile and adapter-owned target paths. It intentionally excludes credentials, authentication stores, databases, caches, logs, and transcripts.
+`skillbridge` is designed to run locally and write only to its canonical profile and adapter-owned target paths. It intentionally excludes credentials, authentication stores, databases, caches, logs, and transcripts.
 
 ## Reporting a vulnerability
 
-Please do not open a public issue for a suspected security vulnerability. Report it privately through the repository's [GitHub Security Advisory form](https://github.com/AhmedShehab/agent-sync/security/advisories/new). If that form is unavailable, contact the repository maintainer through [their GitHub profile](https://github.com/AhmedShehab).
+Please do not open a public issue for a suspected security vulnerability. Report it privately through the repository's [GitHub Security Advisory form](https://github.com/AhmedShehab/skillbridge/security/advisories/new). If that form is unavailable, contact the repository maintainer through [their GitHub profile](https://github.com/AhmedShehab).
 
 Include:
 

@@ -5,7 +5,7 @@ use std::process::{Command, Output};
 use tempfile::TempDir;
 
 fn binary() -> &'static str {
-    env!("CARGO_BIN_EXE_agent-sync")
+    env!("CARGO_BIN_EXE_skillbridge")
 }
 
 fn run(home: &Path, args: &[&str]) -> Output {
@@ -14,7 +14,7 @@ fn run(home: &Path, args: &[&str]) -> Output {
         .arg(home)
         .args(args)
         .output()
-        .expect("agent-sync should run")
+        .expect("skillbridge should run")
 }
 
 fn assert_success(output: &Output) {

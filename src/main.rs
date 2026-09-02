@@ -19,7 +19,7 @@ fn select_adapters<'a>(
     let selected = registry.select(requested);
     if let Some(requested) = requested {
         if selected.is_empty() {
-            anyhow::bail!("unknown adapter `{requested}`; run `agent-sync adapters`");
+            anyhow::bail!("unknown adapter `{requested}`; run `skillbridge adapters`");
         }
         return Ok(selected);
     }
@@ -41,7 +41,7 @@ fn main() -> Result<()> {
         } => {
             let store = store::CanonicalStore::init(profile, &home, project_id)?;
             println!(
-                "Initialized agent-sync profile at {}",
+                "Initialized SkillBridge profile at {}",
                 store.root().display()
             );
             println!("Add this directory to Git to sync it across machines.");

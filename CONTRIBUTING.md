@@ -1,6 +1,6 @@
-# Contributing to agent-sync
+# Contributing to SkillBridge
 
-Thanks for helping make `agent-sync` safer and more useful across AI coding tools.
+Thanks for helping make `skillbridge` safer and more useful across AI coding tools.
 
 ## Development setup
 

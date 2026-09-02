@@ -7,13 +7,13 @@ use crate::model::{HostContext, ScopeKind};
 
 #[derive(Debug, Parser)]
 #[command(
-    name = "agent-sync",
+    name = "skillbridge",
     version,
     about = "Sync AI coding agent skills and instructions"
 )]
 pub struct Cli {
     /// Override the home directory used for adapter discovery. Useful for tests.
-    #[arg(long, global = true, env = "AGENT_SYNC_HOME")]
+    #[arg(long, global = true, env = "SKILLBRIDGE_HOME")]
     pub home: Option<PathBuf>,
 
     #[command(subcommand)]
@@ -129,8 +129,9 @@ impl Cli {
     pub fn home_dir(&self) -> Result<PathBuf> {
         self.home
             .clone()
+            .or_else(|| std::env::var_os("AGENT_SYNC_HOME").map(PathBuf::from))
             .or_else(dirs::home_dir)
-            .context("could not determine the home directory; pass --home or AGENT_SYNC_HOME")
+            .context("could not determine the home directory; pass --home or SKILLBRIDGE_HOME")
     }
 
     pub fn context(home: &Path, project: Option<PathBuf>) -> HostContext {

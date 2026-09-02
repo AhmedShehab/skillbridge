@@ -298,7 +298,7 @@ fn is_instruction_file(path: &Path) -> bool {
 fn is_generated_instruction(path: &Path) -> bool {
     matches!(
         path.file_name().and_then(|value| value.to_str()),
-        Some("agent-sync.md" | "agent-sync.mdc")
+        Some("agent-sync.md" | "agent-sync.mdc" | "skillbridge.md" | "skillbridge.mdc")
     )
 }
 
@@ -374,11 +374,11 @@ fn render_instructions(
     } else {
         let mut body = if format == InstructionFormat::Mdc {
             String::from(
-                "---\ndescription: Shared instructions managed by agent-sync\nglobs: []\nalwaysApply: true\n---\n\n",
+                "---\ndescription: Shared instructions managed by SkillBridge\nglobs: []\nalwaysApply: true\n---\n\n",
             )
         } else {
             String::from(
-                "<!-- Managed by agent-sync. Edit canonical profile files instead. -->\n\n",
+                "<!-- Managed by SkillBridge. Edit canonical profile files instead. -->\n\n",
             )
         };
         body.push_str("# Shared agent instructions\n\n");

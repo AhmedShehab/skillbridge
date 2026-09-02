@@ -1,14 +1,18 @@
 [package]
-name = "agent-sync"
-version = "0.1.0"
+name = "skill-bridge"
+version = "0.2.0"
 edition = "2021"
-description = "Git-native synchronization for AI coding agent skills and instructions"
+description = "Portable skills and context across AI coding agents"
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/AhmedShehab/agent-sync"
-homepage = "https://github.com/AhmedShehab/agent-sync"
+repository = "https://github.com/AhmedShehab/skillbridge"
+homepage = "https://github.com/AhmedShehab/skillbridge"
 keywords = ["ai", "agents", "skills", "cli", "sync"]
 categories = ["command-line-utilities", "filesystem"]
+
+[[bin]]
+name = "skillbridge"
+path = "src/main.rs"
 
 [dependencies]
 anyhow = "1.0"

@@ -284,7 +284,7 @@ pub fn atomic_write(path: &Path, bytes: &[u8]) -> Result<()> {
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent)?;
     }
-    let temp = path.with_extension(format!("agent-sync-{}", std::process::id()));
+    let temp = path.with_extension(format!("skillbridge-{}", std::process::id()));
     fs::write(&temp, bytes).with_context(|| format!("writing {}", temp.display()))?;
     fs::rename(&temp, path).with_context(|| format!("replacing {}", path.display()))?;
     Ok(())
