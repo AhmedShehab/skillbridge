@@ -231,16 +231,138 @@ fn malformed_skills_fail_scan_without_writing() {
 }
 
 #[test]
-fn adapters_command_lists_the_eight_builtins() {
+fn adapters_command_lists_all_builtins() {
     let fixture = TempDir::new().unwrap();
     let output = run(fixture.path(), &["adapters"]);
     assert_success(&output);
     let output = text(&output);
     for adapter in [
-        "claude", "codex", "gemini", "cline", "cursor", "copilot", "opencode", "aider",
+        "claude",
+        "codex",
+        "gemini",
+        "cline",
+        "cursor",
+        "copilot",
+        "opencode",
+        "aider",
+        "zcode",
+        "zed",
+        "windsurf",
+        "continue",
+        "amazon-q",
+        "kiro",
+        "qwen",
+        "pi",
+        "goose",
+        "crush",
+        "factory",
+        "openhands",
+        "roo",
+        "amp",
+        "kimi",
+        "junie",
+        "vibe",
     ] {
         assert!(output.contains(adapter), "missing adapter {adapter}");
     }
+}
+
+#[test]
+fn discovers_zcode_and_recursive_kiro_rules_without_reimporting_generated_output() {
+    let fixture = TempDir::new().unwrap();
+    let home = fixture.path().join("home");
+    let project = fixture.path().join("project");
+    let profile = fixture.path().join("profile");
+    fs::create_dir_all(project.join(".git")).unwrap();
+    write_file(
+        &home.join(".zcode/AGENTS.md"),
+        "# ZCode preferences\n\nKeep changes small.\n",
+    );
+    write_file(
+        &project.join(".kiro/steering/team/testing.md"),
+        "# Testing\n\nRun the full test suite.\n",
+    );
+    write_file(
+        &project.join(".kiro/steering/ignored.json"),
+        "{\"not\":\"an instruction\"}\n",
+    );
+    write_file(
+        &project.join(".kiro/skills/reviewer/SKILL.md"),
+        "---\nname: reviewer\ndescription: Review code carefully.\n---\n\nReview the diff.\n",
+    );
+
+    assert_success(&run(
+        &home,
+        &["init", "--profile", profile.to_str().unwrap()],
+    ));
+
+    let zcode_scan = run(&home, &["scan", "--agent", "zcode", "--scope", "global"]);
+    assert_success(&zcode_scan);
+    assert!(text(&zcode_scan).contains(".zcode/AGENTS.md"));
+
+    let kiro_scan = run(
+        &home,
+        &[
+            "scan",
+            "--agent",
+            "kiro",
+            "--scope",
+            "project",
+            "--project",
+            project.to_str().unwrap(),
+        ],
+    );
+    assert_success(&kiro_scan);
+    let kiro_scan_text = text(&kiro_scan);
+    assert!(kiro_scan_text.contains("testing.md"));
+    assert!(kiro_scan_text.contains("reviewer"));
+    assert!(!kiro_scan_text.contains("ignored.json"));
+
+    assert_success(&run(
+        &home,
+        &[
+            "import",
+            "--profile",
+            profile.to_str().unwrap(),
+            "--agent",
+            "kiro",
+            "--scope",
+            "project",
+            "--project",
+            project.to_str().unwrap(),
+        ],
+    ));
+    assert_success(&run(
+        &home,
+        &[
+            "apply",
+            "--profile",
+            profile.to_str().unwrap(),
+            "--agent",
+            "kiro",
+            "--scope",
+            "project",
+            "--project",
+            project.to_str().unwrap(),
+            "--yes",
+        ],
+    ));
+    assert!(project.join(".kiro/steering/agent-sync.md").exists());
+
+    let after_apply = run(
+        &home,
+        &[
+            "scan",
+            "--agent",
+            "kiro",
+            "--scope",
+            "project",
+            "--project",
+            project.to_str().unwrap(),
+        ],
+    );
+    assert_success(&after_apply);
+    assert!(!text(&after_apply).contains("agent-sync.md"));
 }
 
 #[test]

@@ -9,18 +9,15 @@ It stores portable content in a human-readable profile, then generates the nativ
 
 ## Supported agents
 
-The first release includes adapters for:
+The built-in adapters cover the main local coding-agent CLIs and agent TUIs:
 
-- Claude Code
-- OpenAI Codex CLI
-- Gemini CLI
-- Cline
-- Cursor
-- GitHub Copilot CLI
-- OpenCode
-- Aider
+- Claude Code, OpenAI Codex CLI, Gemini CLI, Cline, Cursor, GitHub Copilot CLI, OpenCode, and Aider
+- ZCode, Zed Agent, Windsurf, Continue CLI, Amazon Q Developer, and Kiro CLI
+- Qwen Code, Pi, Goose, Crush, Factory Droid, OpenHands, Roo Code, Amp, Kimi Code CLI, Junie, and Mistral Vibe
 
-Agent Skills are stored using the open `SKILL.md` format. The profile also supports Markdown instructions and memory notes. Aider receives conventions files; it does not have native Agent Skills support.
+Agent Skills are stored using the open `SKILL.md` format. The profile also supports Markdown instructions and user-authored memory notes. Adapter support means file-based discovery and materialization; credentials, provider/model configuration, MCP settings, sessions, transcripts, caches, and vendor-generated memories stay local by design. ZCode and Windsurf automatic memories are explicitly excluded because they are machine-local state. Aider, Continue, Goose, Amazon Q, and Windsurf receive their documented rules/conventions files rather than native Agent Skills.
+
+Use `agent-sync adapters` to see every adapter, its capabilities, and a short summary of the native files it understands. Paths are based on each tool's documented conventions and may evolve as vendors add new formats.
 
 ## Install from source
 
