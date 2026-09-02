@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest an improvement or new adapter for agent-sync
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping shape the project. Please consider the local-first safety model when describing the proposal.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: What workflow is difficult or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior or user experience you would like.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: input
+    id: adapter
+    attributes:
+      label: Agent or integration
+      description: If this is an adapter request, which tool and native locations are involved?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and found no duplicate.
+          required: true
+        - label: I considered privacy, secret filtering, conflicts, and portability.
+          required: true
